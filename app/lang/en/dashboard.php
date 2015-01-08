@@ -9,6 +9,7 @@ return [
         'incidents'                => 'Incidents',
         'logged'                   => '{0} There are no incidents, good work.|You have logged one incident.|You have reported <strong>:count</strong> incidents.',
         'incident-create-template' => 'Create Template',
+        'incident-templates'       => 'Incident Templates',
         'add'                      => [
             'title'   => 'Add an incident',
             'success' => 'Incident added.',
@@ -26,6 +27,11 @@ return [
                 'title'   => 'Create an incident template',
                 'success' => 'Template created.',
                 'failure' => 'Something went wrong with the incident template.',
+            ],
+            'edit' => [
+                'title'   => 'Edit template',
+                'success' => 'Template has been updated!',
+                'failure' => 'Something went wrong updating the incident template',
             ],
         ],
     ],

@@ -8,6 +8,7 @@ return [
         'incidents'                => 'Incidentes',
         'logged'                   => '{0} Não existem incidentes, bom trabalho.|Você registrou um incidente.|Você reportou <strong>:count</strong> incidentes.',
         'incident-create-template' => 'Criar template',
+        'incident-templates'       => 'Incident Templates',
         'add'                      => [
             'title'   => 'Adicionar um incidente',
             'success' => 'Incidente adicionado.',
@@ -25,6 +26,11 @@ return [
                 'title'   => 'Criar um modelo de incidente',
                 'success' => 'Incidente adicionado.',
                 'failure' => 'Algo deu errado com o incidente.',
+            ],
+            'edit' => [
+                'title'   => 'Edit template',
+                'success' => 'Template has been updated!',
+                'failure' => 'Something went wrong updating the incident template',
             ],
         ],
     ],

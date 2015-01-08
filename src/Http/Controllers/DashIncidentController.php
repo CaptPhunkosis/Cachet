@@ -34,7 +34,20 @@ class DashIncidentController extends Controller
     public function showAddIncident()
     {
         return View::make('dashboard.incidents.add')->with([
-            'pageTitle' => trans('dashboard.incidents.add.title').' - '.trans('dashboard.dashboard'),
+            'pageTitle'         => trans('dashboard.incidents.add.title').' - '.trans('dashboard.dashboard'),
+            'incidentTemplates' => IncidentTemplate::all(),
+        ]);
+    }
+
+    /**
+     * Shows the incident templates.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showTemplates()
+    {
+        return View::make('dashboard.incidents.templates.index')->with([
+            'pageTitle' => trans('dashboard.incidents.templates').' - '.trans('dashboard.dashboard'),
         ]);
     }
 
@@ -47,6 +60,19 @@ class DashIncidentController extends Controller
     {
         return View::make('dashboard.incidents.templates.add')->with([
             'pageTitle' => trans('dashboard.incidents.templates.add.title').' - '.trans('dashboard.dashboard'),
+        ]);
+    }
+
+    /**
+     * Shows the edit incident template view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showEditTemplateAction(IncidentTemplate $template)
+    {
+        return View::make('dashboard.incidents.templates.edit')->with([
+            'pageTitle' => trans('dashboard.incidents.templates.edit.title').' - '.trans('dashboard.dashboard'),
+            'template'  => $template,
         ]);
     }
 
@@ -117,5 +143,19 @@ class DashIncidentController extends Controller
         $incident->update($_incident);
 
         return Redirect::to('dashboard/incidents');
+    }
+
+    /**
+     * Edit an incident template.
+     *
+     * @param \CachetHQ\Cachet\Models\IncidentTemplate $template
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function editTemplateAction(IncidentTemplate $template)
+    {
+        $template->update(Binput::get('template'));
+
+        return Redirect::back()->with('updatedTemplate', $template);
     }
 }

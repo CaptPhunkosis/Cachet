@@ -47,11 +47,23 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard', 'namespace' => 'Cache
         Route::delete('{incident}/delete', 'DashIncidentController@deleteIncidentAction');
         Route::get('{incident}/edit', 'DashIncidentController@showEditIncidentAction');
         Route::post('{incident}/edit', 'DashIncidentController@editIncidentAction');
-        Route::get('template', [
-            'as'   => 'dashboard.incidents.template',
+    });
+
+    // Incident Templates
+    Route::group(['prefix' => 'templates'], function () {
+        Route::get('/', [
+            'as'   => 'dashboard.templates',
+            'uses' => 'DashIncidentController@showTemplates',
+        ]);
+
+        Route::get('add', [
+            'as'   => 'dashboard.templates.add',
             'uses' => 'DashIncidentController@showAddIncidentTemplate',
         ]);
-        Route::post('template', 'DashIncidentController@createIncidentTemplateAction');
+        Route::post('add', 'DashIncidentController@createIncidentTemplateAction');
+
+        Route::get('edit/{incident_template}', 'DashIncidentController@showEditTemplateAction');
+        Route::post('edit/{incident_template}', 'DashIncidentController@editTemplateAction');
     });
 
     // Metrics
@@ -119,6 +131,7 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard', 'namespace' => 'Cache
     // Internal API.
     // This should only be used for making requests within the dashboard.
     Route::group(['prefix' => 'api'], function () {
+        Route::get('incidents/templates', 'DashAPIController@getIncidentTemplate');
         Route::post('components/order', 'DashAPIController@postUpdateComponentOrder');
         Route::post('components/{component}', 'DashAPIController@postUpdateComponent');
     });
